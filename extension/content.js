@@ -9,7 +9,8 @@
   chrome.runtime.onMessage.addListener((msg) => {
     if (msg.type === "VTT_FOUND") {
       USubHboProvider.handleVttFound(msg.url);
+    } else if (msg.type === "DASH_SEGMENT_FOUND") {
+      USubElisaProvider.handleSegmentFound(msg.url);
     }
-    // DASH_SEGMENT_FOUND will be added here in the Elisa/DASH step.
   });
 })();
