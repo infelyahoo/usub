@@ -1,0 +1,29 @@
+#subtitle-overlay {
+  position: fixed !important;
+  bottom: 8% !important;
+
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 100%;
+  max-width: 85%;
+
+  text-align: center;
+  font-size: 48px;
+  color: rgba(255, 221, 0, 1);
+  background: rgba(0, 0, 0, 0.85);
+  border-radius: 8px;
+  padding: 12px 20px;
+  text-shadow: 0 0 8px black, 0 0 4px black;
+  pointer-events: none;
+  z-index: 2147483647 !important;
+  line-height: 1.4;
+}
+
+/* Extra safety for fullscreen */
+:-webkit-full-screen #subtitle-overlay,
+:-moz-full-screen #subtitle-overlay,
+:fullscreen #subtitle-overlay {
+  position: fixed !important;
+  z-index: 2147483647 !important;
+}
