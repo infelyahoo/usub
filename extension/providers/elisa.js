@@ -42,9 +42,21 @@ const USubElisaProvider = {
       if (cues.length > 0) {
         USubOverlay.addCues(cues);
         console.log(`[USub/Elisa] +${cues.length} cues (total ${USubOverlay.cues.length})`);
+
+        // Pre-translate this segment's cues in one batch request instead of
+        // waiting for each to hit on-demand during playback.
+        this.translateCues(cues);
       }
     } catch (e) {
       console.error("[USub/Elisa] Failed to process DASH segment", url, e);
+    }
+  },
+
+  async translateCues(cues) {
+    const settings = USubSettings.get();
+    const map = await USubTranslator.translateBatch(cues.map(c => c.original), settings);
+    for (const cue of cues) {
+      if (!cue.translated) cue.translated = map.get(cue.original);
     }
   },
 
