@@ -7,6 +7,9 @@ chrome.webRequest.onCompleted.addListener(
         { type: "VTT_FOUND", url: details.url }
       ).catch(() => {});
     }
+
+    // DASH/Elisa segment matching (textstream_fin=1000-*.dash) will be
+    // added here in the next step, sending a DASH_SEGMENT_FOUND message.
   },
   { urls: ["<all_urls>"] }
 );

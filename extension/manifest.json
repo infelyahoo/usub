@@ -1,15 +1,23 @@
 {
   "manifest_version": 3,
-  "name": "HBO Max Subtitle Overlay",
-  "version": "1.4",
-  "description": "Captures VTT subtitles, translates via local Argos server, and overlays them.",
+  "name": "Universal Subtitle Translator",
+  "version": "2.0",
+  "description": "Captures subtitles (VTT, and soon DASH/TTML), translates via a local Argos server, and overlays them.",
   "permissions": ["webRequest", "scripting", "activeTab", "storage"],
   "host_permissions": ["*://*.max.com/*", "*://*.hbomax.com/*", "<all_urls>"],
   "background": { "service_worker": "background.js" },
-  "action": { "default_popup": "popup.html" },
+  "action": { "default_popup": "popup/popup.html" },
   "content_scripts": [{
     "matches": ["*://*.max.com/*", "*://*.hbomax.com/*"],
-    "js": ["content.js", "translator.js"],
+    "js": [
+      "core/settings.js",
+      "core/cache.js",
+      "core/translator.js",
+      "core/overlay.js",
+      "parsers/vtt.js",
+      "providers/hbo.js",
+      "content.js"
+    ],
     "css": ["overlay.css"],
     "run_at": "document_idle"
   }]
